@@ -1,0 +1,48 @@
+{
+  "title": "Claude on Bedrock Explainer",
+  "label": "Diagram: your app sends a prompt to Amazon Bedrock, Bedrock passes it to Claude, and the answer streams back",
+  "canvas": [1620, 940],
+  "steps": [
+    {
+      "caption": "Your app has a prompt to send: summarize this week's support tickets.",
+      "draw": [
+        { "kind": "title", "text": "What happens when your app calls Claude on Bedrock?" },
+        { "kind": "bubble", "x": 80, "y": 190, "w": 380, "h": 80, "tail": "bottom", "tailAt": 236, "tip": [252, 322],
+          "lines": ["Summarize this week's tickets"], "color": "yellow" },
+        { "kind": "card", "x": 60, "y": 330, "w": 420, "h": 160, "title": "Your app",
+          "lines": ["a support dashboard", "calling Bedrock with the AWS SDK"], "color": "blue" }
+      ]
+    },
+    {
+      "caption": "It calls Amazon Bedrock in your AWS account. IAM policies decide who can call which model.",
+      "draw": [
+        { "kind": "arrow", "points": [[490, 385], [590, 385]], "label": "prompt", "labelAt": [540, 369] },
+        { "kind": "card", "x": 600, "y": 330, "w": 420, "h": 160, "title": "Amazon Bedrock",
+          "lines": ["AWS operates it, in your AWS account", "IAM decides who can call which model"], "color": "orange" }
+      ]
+    },
+    {
+      "caption": "Bedrock hands the request to Claude, which reads the prompt and writes the answer.",
+      "draw": [
+        { "kind": "arrow", "points": [[1030, 385], [1130, 385]], "label": "prompt", "labelAt": [1080, 369] },
+        { "kind": "card", "x": 1140, "y": 330, "w": 420, "h": 160, "title": "Claude",
+          "lines": ["Anthropic's model", "reads the prompt, writes the answer"], "color": "purple" }
+      ]
+    },
+    {
+      "caption": "Claude's answer streams back through Bedrock to your app, a few words at a time.",
+      "draw": [
+        { "kind": "arrow", "points": [[1130, 452], [1030, 452]], "color": "green", "label": "answer", "labelAt": [1080, 482] },
+        { "kind": "arrow", "points": [[590, 452], [490, 452]], "color": "green", "label": "answer", "labelAt": [540, 482] },
+        { "kind": "bubble", "x": 60, "y": 580, "w": 640, "h": 116, "tail": "top", "tailAt": 215, "tip": [232, 502],
+          "lines": ["Top issue: login timeouts after Tuesday's release,", "then billing questions."], "color": "green" }
+      ]
+    },
+    {
+      "caption": "That's the whole path: your app, Amazon Bedrock, Claude. It all lands on one AWS bill.",
+      "draw": [
+        { "kind": "text", "x": 810, "y": 800, "text": "Three hops: your app, Amazon Bedrock, Claude. One AWS bill.", "fs": 30 }
+      ]
+    }
+  ]
+}
